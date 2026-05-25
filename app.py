@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import json
 import os
+import uuid
 
 app = Flask(__name__)
 
@@ -52,20 +53,20 @@ def agenda_page():
 @app.route("/criar", methods=["POST"])
 def criar():
 
-    titulo = request.form.get("titulo")
+    numero = request.form.get("numero")
     descricao = request.form.get("descricao")
     DDD = request.form.get("DDD")
 
-    if titulo:
+    if numero:
 
         Agenda.append({
-            "id": (),
-            "titulo": titulo,
+            "id": str(uuid.uuid4()),
+            "numero": numero,
             "descricao": descricao,
             "DDD": DDD,
         })
 
-        salvar_json(AGENDA, Agenda )
+        salvar_json(AGENDA, Agenda)
 
     return redirect(url_for("agenda_page"))
 def buscar_numero(id):
