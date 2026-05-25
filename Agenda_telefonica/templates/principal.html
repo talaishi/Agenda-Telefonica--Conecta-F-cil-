@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principal</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='principal.css') }}">
+</head>
+
+<body>
+
+    <h1 class="title">Olá, {{ username }}</h1>
+
+    <!-- Barra horizontal de opções -->
+    <div class="barra-opcoes">
+        <button class="botao-opcao" onclick="window.location.href='/criar'">
+            Adicionar novo contato
+        </button>
+    </div>
+
+    <div class="lista-AGENDA">
+
+        {% for contato in Agenda %}
+
+        <div class="card-contato">
+
+            <div class="topo-card">
+                <h2>{{ contato.nome }}</h2>
+                <span class="estado">{{ contato.estado }}</span>
+            </div>
+
+            <p class="descricao">
+                {{ contato.descricao }}
+            </p>
+
+            <div class="info">
+                <p><strong>DDD:</strong> {{ contato.ddd }}</p>
+                <p><strong>Número:</strong> {{ contato.numero }}</p>
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+</html>

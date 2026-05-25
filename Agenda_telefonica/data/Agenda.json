@@ -1,0 +1,32 @@
+[
+    {
+        "ddd": 11,
+        "numero": "+55 84 99846-1381",
+        "estado": "SP",
+        "nome": "Charlie Kirk",
+        "descricao": "Charlie Charlie Kirky"
+    },
+    {
+        "ddd": 13,
+        "numero": "+55 84 99846-1381",
+        "estado": "SP",
+        "nome": "Benjamin Netanyahu",
+        "descricao": "Benjamin Netanyahu"
+    },
+    {
+        "id": "0dc4d1e9-b444-492a-8922-308e904ababa",
+        "ddd": 21,
+        "numero": "+55 84 99846-1381",
+        "estado": "RJ",
+        "nome": "asdf",
+        "descricao": "asdf"
+    },
+    {
+        "id": "f4b951f7-5f0d-4082-a8bb-95b5e21ba5a2",
+        "ddd": 32,
+        "numero": "+55 84 99846-1381",
+        "estado": "MG",
+        "nome": "12345",
+        "descricao": "dsdsd"
+    }
+]
