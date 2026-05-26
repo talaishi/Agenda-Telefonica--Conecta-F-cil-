@@ -1,0 +1,16 @@
+{
+    "id": "63200926-f4ff-4cbd-81ce-ecefa472fbb7",
+    "username": "Douglas",
+    "password": "12345",
+    "telefone": "+55 84 96565-4242",
+    "contatos": [
+        {
+            "id": "1d07bc31-d7c0-4826-bd5c-76139cbf9a19",
+            "nome": "aluno",
+            "descricao": "alunos",
+            "ddd": "62",
+            "estado": "GO",
+            "numero": "+55 84 96555-5256"
+        }
+    ]
+}

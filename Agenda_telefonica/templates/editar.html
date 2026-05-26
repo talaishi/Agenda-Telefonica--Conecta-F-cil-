@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Contato</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='principal.css') }}">
+</head>
+
+<body>
+
+    <h1 class="title">Editar Contato</h1>
+
+    <div class="barra-opcoes">
+
+        <a href="{{ url_for('principal') }}">
+            <button class="botao-opcao" type="button">
+                Voltar para Agenda
+            </button>
+        </a>
+
+    </div>
+
+    <div class="container-formulario">
+
+        <form class="form-contato" method="POST" action="{{ url_for('editar', id=contato.id) }}">
+
+            <div class="campo">
+                <label>Nome</label>
+                <input type="text" name="nome" value="{{ contato.nome }}" required>
+            </div>
+
+            <div class="campo">
+                <label>Descrição</label>
+                <textarea name="descricao" rows="4" required>{{ contato.descricao }}</textarea>
+            </div>
+
+            <div class="campo">
+                <label>DDD</label>
+
+                <select name="ddd">
+                    {% if ddds %}
+                        {% for d in ddds %}
+                            <option value="{{ d.ddd }}" {% if d.ddd|string == contato.ddd|string %}selected{% endif %}>
+                                {{ d.ddd }} | {{ d.estado }}
+                            </option>
+                        {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+
+            <div class="campo">
+                <label>Número</label>
+                <input type="text" name="numero" value="{{ contato.numero }}" required>
+            </div>
+
+            <button type="submit" class="botao-salvar">
+                Atualizar contato
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

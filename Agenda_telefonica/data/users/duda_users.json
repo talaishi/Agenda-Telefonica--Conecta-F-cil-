@@ -1,0 +1,16 @@
+{
+    "id": "37981c66-3a6f-47be-b609-887616ce196d",
+    "username": "duda",
+    "password": "1234",
+    "telefone": "+55 84 96565-4242",
+    "contatos": [
+        {
+            "id": "c5ea9299-6bfe-4a47-868c-d3d60aff896e",
+            "nome": "mutshuiro watanabe",
+            "descricao": "O passaro",
+            "ddd": "11",
+            "estado": "SP",
+            "numero": "+55 84 96555-5256"
+        }
+    ]
+}

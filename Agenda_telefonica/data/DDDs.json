@@ -1,0 +1,95 @@
+[
+    { "ddd": 11, "estado": "SP" },
+    { "ddd": 12, "estado": "SP" },
+    { "ddd": 13, "estado": "SP" },
+    { "ddd": 14, "estado": "SP" },
+    { "ddd": 15, "estado": "SP" },
+    { "ddd": 16, "estado": "SP" },
+    { "ddd": 17, "estado": "SP" },
+    { "ddd": 18, "estado": "SP" },
+    { "ddd": 19, "estado": "SP" },
+  
+    { "ddd": 21, "estado": "RJ" },
+    { "ddd": 22, "estado": "RJ" },
+    { "ddd": 24, "estado": "RJ" },
+  
+    { "ddd": 27, "estado": "ES" },
+    { "ddd": 28, "estado": "ES" },
+  
+    { "ddd": 31, "estado": "MG" },
+    { "ddd": 32, "estado": "MG" },
+    { "ddd": 33, "estado": "MG" },
+    { "ddd": 34, "estado": "MG" },
+    { "ddd": 35, "estado": "MG" },
+    { "ddd": 37, "estado": "MG" },
+    { "ddd": 38, "estado": "MG" },
+  
+    { "ddd": 41, "estado": "PR" },
+    { "ddd": 42, "estado": "PR" },
+    { "ddd": 43, "estado": "PR" },
+    { "ddd": 44, "estado": "PR" },
+    { "ddd": 45, "estado": "PR" },
+    { "ddd": 46, "estado": "PR" },
+  
+    { "ddd": 47, "estado": "SC" },
+    { "ddd": 48, "estado": "SC" },
+    { "ddd": 49, "estado": "SC" },
+  
+    { "ddd": 51, "estado": "RS" },
+    { "ddd": 53, "estado": "RS" },
+    { "ddd": 54, "estado": "RS" },
+    { "ddd": 55, "estado": "RS" },
+  
+    { "ddd": 61, "estado": "DF" },
+    { "ddd": 61, "estado": "GO" },
+    { "ddd": 62, "estado": "GO" },
+    { "ddd": 64, "estado": "GO" },
+  
+    { "ddd": 63, "estado": "TO" },
+  
+    { "ddd": 65, "estado": "MT" },
+    { "ddd": 66, "estado": "MT" },
+  
+    { "ddd": 67, "estado": "MS" },
+  
+    { "ddd": 68, "estado": "AC" },
+  
+    { "ddd": 69, "estado": "RO" },
+  
+    { "ddd": 71, "estado": "BA" },
+    { "ddd": 73, "estado": "BA" },
+    { "ddd": 74, "estado": "BA" },
+    { "ddd": 75, "estado": "BA" },
+    { "ddd": 77, "estado": "BA" },
+  
+    { "ddd": 79, "estado": "SE" },
+  
+    { "ddd": 81, "estado": "PE" },
+    { "ddd": 87, "estado": "PE" },
+  
+    { "ddd": 82, "estado": "AL" },
+  
+    { "ddd": 83, "estado": "PB" },
+  
+    { "ddd": 84, "estado": "RN" },
+  
+    { "ddd": 85, "estado": "CE" },
+    { "ddd": 88, "estado": "CE" },
+  
+    { "ddd": 86, "estado": "PI" },
+    { "ddd": 89, "estado": "PI" },
+  
+    { "ddd": 91, "estado": "PA" },
+    { "ddd": 93, "estado": "PA" },
+    { "ddd": 94, "estado": "PA" },
+  
+    { "ddd": 92, "estado": "AM" },
+    { "ddd": 97, "estado": "AM" },
+  
+    { "ddd": 95, "estado": "RR" },
+  
+    { "ddd": 96, "estado": "AP" },
+  
+    { "ddd": 98, "estado": "MA" },
+    { "ddd": 99, "estado": "MA" }
+  ]
