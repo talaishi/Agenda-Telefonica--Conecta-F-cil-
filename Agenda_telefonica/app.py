@@ -10,10 +10,8 @@ DDD = "data/DDDs.json"
 AGENDA = "data/Agenda.json"
 
 def carregar_json(arquivo):
-
     if not os.path.exists(arquivo):
         return []
-
     try:
         with open(arquivo, "r", encoding="utf-8") as f:
             content = f.read().strip()
@@ -36,6 +34,78 @@ ddd = carregar_json(DDD)
 def home():
     return render_template("login.html")
 
+@app.route("/cadastro")
+def cadastro():
+    return render_template("cadastro.html")
+
+@app.route("/salvarcadastro", methods=["POST"])
+def salvarcadastro():
+    username = (request.form.get("username") or "").strip()
+    telefone = (request.form.get("telefone") or "").strip()
+    password = (request.form.get("password") or "").strip()
+    password2x = (request.form.get("passwordx2") or "").strip()
+
+    if not username or not password or not telefone:
+        erro = "Todos os campos são obrigatórios."
+        return render_template("cadastro_erro.html", erro=erro)
+
+    if password != password2x:
+        erro = "As senhas não coincidem. Por favor, tente novamente."
+        return render_template("cadastro_erro.html", erro=erro)
+
+    if not telefone.startswith("+55 ") or len(telefone) != 17:
+        erro = "O número de telefone é inválido. Use o formato +55 84 9xxxx-xxxx."
+        return render_template("cadastro_erro.html", erro=erro)
+    
+    caracteres = ["_", ".", ",", "!", "@", "#", "$", "%", "¨", "&", "*", "(", ")", "=", "/", "?", ";", ":", "<", ">", "|", "\"", "'", "´", "`", "~", "^"]
+
+    if any(ch.isalpha() for ch in telefone):
+        if any(ch in telefone for ch in caracteres):
+            erro = "O número de telefone contém caracteres inválidos."
+            return render_template("cadastro_erro.html", erro=erro)
+        erro = "O número de telefone contém caracteres inválidos."
+        return render_template("cadastro_erro.html", erro=erro)
+
+    users_dir = os.path.join("data", "users")
+    os.makedirs(users_dir, exist_ok=True)
+
+    for arquivo in os.listdir(users_dir):
+        if not arquivo.endswith(".json"):
+            continue
+        caminho_arquivo = os.path.join(users_dir, arquivo)
+        try:
+            with open(caminho_arquivo, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+        except (JSONDecodeError, OSError):
+            continue
+
+        if data.get("username") == username:
+            erro = "O nome de usuário já existe. Por favor, escolha outro."
+            return render_template("cadastro_erro.html", erro=erro)
+        if data.get("password") == password:
+            erro = "A senha já está em uso. Por favor, escolha outra."
+            return render_template("cadastro_erro.html", erro=erro)
+
+    novo_id = str(uuid.uuid4())
+    novo_usuario = {
+        "id": novo_id,
+        "username": username,
+        "password": password,
+        "telefone": telefone,
+        "contatos": []
+    }
+
+    caminho_novo = os.path.join(users_dir, f"{username}_users.json")
+    try:
+        with open(caminho_novo, 'w', encoding='utf-8') as f:
+            json.dump(novo_usuario, f, ensure_ascii=False, indent=4)
+    except OSError:
+        erro = "Falha ao gravar o arquivo de usuário."
+        return render_template("cadastro_erro.html", erro=erro)
+
+    return redirect(url_for("home"))
+#@app.route
+
 @app.route("/criarerro")
 def criarerro():
     return render_template("criar_erro.html")
@@ -47,18 +117,44 @@ def loginerro():
 @app.route("/login")
 def login():
 
-    username = request.args.get("user")
-    password = request.args.get("senha")
+    username = (request.args.get("user") or "").strip()
+    password = (request.args.get("senha") or "").strip()
 
-    with open("data/usuarios.json", "r", encoding="utf-8") as f:
-        usuarios = json.load(f)
+    if not username or not password:
+        return redirect(url_for("loginerro"))
 
-    for usuario in usuarios:
-        print(usuario["username"], usuario["password"])
-        print(username, password)
-        if usuario["username"] == username and usuario["password"] == password:
-            return render_template("principal.html", Agenda=Agenda, username=username)
-    
+    users_dir = os.path.join("data", "users")
+
+    if not os.path.exists(users_dir):
+        return redirect(url_for("loginerro"))
+
+    for arquivo in os.listdir(users_dir):
+
+        if not arquivo.endswith(".json"):
+            continue
+
+        caminho_arquivo = os.path.join(users_dir, arquivo)
+
+        try:
+            with open(caminho_arquivo, "r", encoding="utf-8") as f:
+                usuario = json.load(f)
+
+        except (json.JSONDecodeError, OSError):
+            continue
+
+        usuario_username = usuario.get("username")
+        usuario_password = usuario.get("password")
+
+        if usuario_username == username and usuario_password == password:
+
+            agenda = usuario.get("agenda", [])
+
+            return render_template(
+                "principal.html",
+                Agenda=agenda,
+                username=username
+            )
+
     return redirect(url_for("loginerro"))
 
 @app.route("/agenda", methods=["GET"])
@@ -88,49 +184,70 @@ def criar():
 
 @app.route("/salvar", methods=["POST"])
 def salvar():
-    # lê campos do form
-    ddd_value = request.form.get('ddd')      # ex: "11SP"
-    numero = request.form.get('numero')
-    nome = request.form.get('nome')
-    descricao = request.form.get('descricao', '')
+    username = (request.form.get("username") or "").strip()
+    telefone = (request.form.get("telefone") or "").strip()
+    password = (request.form.get("password") or "").strip()
+    password2x = (request.form.get("passwordx2") or "").strip()
 
-    # valida campos obrigatórios
-    if not ddd_value or not numero or not nome:
-        return redirect(url_for('criar_erro'))
+    if not username or not password or not telefone:
+        erro = "Todos os campos são obrigatórios."
+        return render_template("cadastro_erro.html", erro=erro)
 
-    # separa parte numérica do DDD e o estado
-    ddd_digits = ''.join(ch for ch in ddd_value if ch.isdigit())
-    ddd_estado = ''.join(ch for ch in ddd_value if not ch.isdigit()).strip()
+    if password != password2x:
+        erro = "As senhas não coincidem. Por favor, tente novamente."
+        return render_template("cadastro_erro.html", erro=erro)
 
-    try:
-        ddd_numero = int(ddd_digits)
-    except (ValueError, TypeError):
-        return redirect(url_for('criar_erro'))
+    if not telefone.startswith("+55 ") or len(telefone) != 17:
+        erro = "O número de telefone é inválido. Use o formato +55 84 9xxxx-xxxx."
+        return render_template("cadastro_erro.html", erro=erro)
+    
+    caracteres = ["_", ".", ",", "!", "@", "#", "$", "%", "¨", "&", "*", "(", ")", "=", "/", "?", ";", ":", "<", ">", "|", "\"", "'", "´", "`", "~", "^"]
 
-    # função para normalizar números (remover símbolos/espaços)
-    def normalize(n):
-        return ''.join(ch for ch in (n or '') if ch.isdigit())
+    if any(ch.isalpha() for ch in telefone):
+        if any(ch in telefone for ch in caracteres):
+            erro = "O número de telefone contém caracteres inválidos."
+            return render_template("cadastro_erro.html", erro=erro)
+        erro = "O número de telefone contém caracteres inválidos."
+        return render_template("cadastro_erro.html", erro=erro)
 
-    # verifica duplicata (mesmo DDD e mesmo número normalizado)
-    for contato in Agenda:
-        if contato.get('ddd') == ddd_numero and normalize(contato.get('numero')) == normalize(numero):
-            return redirect(url_for('criar_erro'))
+    users_dir = os.path.join("data", "users")
+    os.makedirs(users_dir, exist_ok=True)
 
-    # cria novo contato e salva em memória e no arquivo
-    novo = {
-        'id': str(uuid.uuid4()),
-        'ddd': ddd_numero,
-        'numero': numero,
-        'estado': ddd_estado,
-        'nome': nome,
-        'descricao': descricao
+    for arquivo in os.listdir(users_dir):
+        if not arquivo.endswith(".json"):
+            continue
+        caminho_arquivo = os.path.join(users_dir, arquivo)
+        try:
+            with open(caminho_arquivo, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+        except (JSONDecodeError, OSError):
+            continue
+
+        if data.get("username") == username:
+            erro = "O nome de usuário já existe. Por favor, escolha outro."
+            return render_template("cadastro_erro.html", erro=erro)
+        if data.get("password") == password:
+            erro = "A senha já está em uso. Por favor, escolha outra."
+            return render_template("cadastro_erro.html", erro=erro)
+
+    novo_id = str(uuid.uuid4())
+    novo_usuario = {
+        "id": novo_id,
+        "username": username,
+        "password": password,
+        "telefone": telefone,
+        "agenda": []
     }
 
-    Agenda.append(novo)
-    salvar_json(AGENDA, Agenda)
+    caminho_novo = os.path.join(users_dir, f"{username}_users.json")
+    try:
+        with open(caminho_novo, 'w', encoding='utf-8') as f:
+            json.dump(novo_usuario, f, ensure_ascii=False, indent=4)
+    except OSError:
+        erro = "Falha ao gravar o arquivo de usuário."
+        return render_template("cadastro_erro.html", erro=erro)
 
-    # redireciona para a página de agenda (ou troque para onde preferir)
-    return redirect(url_for('agenda_page'))
+    return redirect(url_for("home"))
 
 def buscar_numero(id):
 

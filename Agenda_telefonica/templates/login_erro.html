@@ -8,28 +8,41 @@
 </head>
 <body>
 
+    <img id="background" src="{{ url_for('static', filename='background.png') }}" alt="logo" class="logo-fundo">
+
     <div class="entrada">
-        <img src="static/logo.png" alt="logo">
-        <img id="conecta" src="static/conectafacil.png" alt="conecta facil">
+        <div>
+            <img id="logo" src="static/logo.png" alt="logo">
+            <img id="conecta" src="static/conectafacil.png" alt="conecta facil">
+        </div>
 
         <h1>Login</h1>
 
-        <form action="{{ url_for('login') }}">
+        <form action="{{ url_for('login') }}" >
             <input type="text" name="user" placeholder="Usuário" required>
-            <input type="password" name="senha" placeholder="Senha" required>
+            <input id="passwd" type="password" name="senha" placeholder="Senha" required>
 
             <button type="submit">Entrar</button>
 
             <p class="cadastro">
                 Não tem conta?
-                <a href="cadastro.html">Cadastre-se</a>
+                <a href="/cadastro">Cadastre-se</a>
             </p>
         </form>
-        <div class="mensagem-erro" id="mensagemErro" role="alert">
-            <h2>Erro de autenticação</h2>
-            <p>O usuário ou a senha estão incorretos. Verifique e tente novamente.</p>
-        </div>
+            <div id="toggle-container">
+                <a href="#" id="togglePassword">⌣</a>
+            </div>
     </div>
+
+    <div>
+        <div class="mensagem-erro" id="mensagemErro" role="alert">
+           <h2>Erro de autenticação</h2>
+           <p>O usuário ou a senha estão incorretos. Verifique e tente novamente.</p>
+        </div>  
+    </div>
+
+    
+    <script src="static/toggle_script.js"></script>
 
 </body>
 </html>
