@@ -1,0 +1,149 @@
+.topo{
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    color: #0060DD;
+    font-family: Arial, Helvetica, sans-serif;
+}
+img{
+    width: 150px;
+    height: auto;
+}
+.banner{
+    background-color: #0c0961;
+    color: white;
+    margin: 100px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    border-radius: 10px;
+    padding-left: 125px;
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-bottom: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.banner h1{
+    margin: 0;
+}
+
+.banner span{
+    color:#0060DD;
+    position: relative;
+}
+#telefonetelaprincipal{
+    position: absolute;
+    right: 280px;
+    top: 50%;
+    transform: translateY(-68%);
+    width: 500px;
+}
+h1{
+    font-size: 40px;
+}
+h2{
+    margin: 0;
+    font-size: 30px;
+}
+p{
+    font-size: 16px;
+    margin-top: 30px;
+}
+.botao{
+    background-color: #0060DD;
+    color: white;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 30px;
+    border-radius: 25px;
+}
+.text{
+    margin-top: 15px;
+}
+h4{
+    font-size: 20px;
+}
+.user{
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+.seta{
+    font-size: 20px;
+    cursor: pointer;
+}
+.barra-pesquisa{
+    display: flex;
+    align-items: center;
+    background-color: #f1f3f4;
+    padding: 10px 15px;
+    border-radius: 25px;
+    width: 300px;
+    transition: 0.3s;
+    margin-left: 300px;
+    margin-top: 0;
+}
+.barra-pesquisa input{
+    border: none;
+    outline: none;
+    background: transparent;
+    margin-left: 10px;
+    font-size: 14px;
+}
+.icone{
+    font-size: 16px;
+    color: #555;
+}
+.barra-pesquisa:focus-within{
+    background-color: #fff;
+    box-shadow: 0 0 0 2px #0060DD;
+}
+.filtragem{
+    display: flex;
+    justify-content: start;
+    margin-top: 30px;
+    margin-left: 300px;
+    padding-top: 25px;
+}
+#info1{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-right: 400px;
+    
+}
+#info2{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.acoes{
+    margin-left: 100px;
+    margin-top: 35px;
+}
+.acoes button{
+    border: none;
+    padding: 6px 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.editar{
+    background-color: #4CAF50;
+    color: white;
+}
+.excluir{
+    background-color: #f44336;
+    color: white;
+}
+.acoes button:hover{
+    opacity: 0.8;
+}
+.voltar{
+    margin-left: 35px;
+    background-color: #0c0961;
+    color: white;
+    border-radius: 5px;
+    margin-top: 25px;
+}
